@@ -30,25 +30,26 @@ class network():
         # self.CPTs["T"] = {"+t|+d": pos_t, "-t|-d": neg_t,
         #               "+t|-d": 1-pos_t, "-t|+d": 1-neg_t}
 
-        # d = 0.1
-        # self.CPTs["D"] = {"+d": d, "-d":1-d }
-        # self.CPTs["T"] = {"+t|+d": 0.99, "-t|-d": 0.95,
-        #                     "+t|-d": 0.01, "-t|+d": 0.05}
+        d = 0.08
+        self.CPTs["D"] = {"+d": d, "-d":1-d }
+        self.CPTs["T"] = {"+t|+d": 0.99, "-t|-d": 0.95,
+                            "+t|-d": 0.01, "-t|+d": 0.05}
         
-        # self.CPTs["order"] = ["D", "T"]
-        # self.CPTs["parents"] = {"D": None, "T": "D"}
-        self.CPTs["B"]={"+b":0.001, "-b":0.999}
-        self.CPTs["E"]={"+e":0.002, "-e":0.998}
-        self.CPTs["A"]={"+a|+b+e":0.95, "-a|+b+e":0.05, 
-                "+a|+b-e":0.94, "-a|+b-e":0.06,
-                "+a|-b+e":0.29, "-a|-b+e":0.71,
-                "+a|-b-e":0.001, "-a|-b-e":0.999}
-        self.CPTs["J"]={"+j|+a":0.90, "-j|+a":0.10, 
-                "+j|-a":0.05, "-j|-a":0.95}
-        self.CPTs["M"]={"+m|+a":0.70, "-m|+a":0.30, 
-                "+m|-a":0.01, "-m|-a":0.99}
-        self.CPTs["order"]=["B", "E", "A", "J", "M"]
-        self.CPTs["parents"]={"B":None, "E":None, "A":"B,E", "J":"A", "M":"A"}
+        self.CPTs["order"] = ["D", "T"]
+        self.CPTs["parents"] = {"D": None, "T": "D"}
+
+        # self.CPTs["B"]={"+b":0.001, "-b":0.999}
+        # self.CPTs["E"]={"+e":0.002, "-e":0.998}
+        # self.CPTs["A"]={"+a|+b+e":0.95, "-a|+b+e":0.05, 
+        #         "+a|+b-e":0.94, "-a|+b-e":0.06,
+        #         "+a|-b+e":0.29, "-a|-b+e":0.71,
+        #         "+a|-b-e":0.001, "-a|-b-e":0.999}
+        # self.CPTs["J"]={"+j|+a":0.90, "-j|+a":0.10, 
+        #         "+j|-a":0.05, "-j|-a":0.95}
+        # self.CPTs["M"]={"+m|+a":0.70, "-m|+a":0.30, 
+        #         "+m|-a":0.01, "-m|-a":0.99}
+        # self.CPTs["order"]=["B", "E", "A", "J", "M"]
+        # self.CPTs["parents"]={"B":None, "E":None, "A":"B,E", "J":"A", "M":"A"}
 
 
     def sampleVariable(self, CPT, conditional):
@@ -95,7 +96,8 @@ class network():
                 normalized[sign] = value / prob_sum
             else:
                 normalized[sign] = 0
-        print(unormalized_probs)
+                print('unormalized probs are zero!')
+
         return normalized
 
     def is_consistent(self, evidence, random_query):
@@ -110,10 +112,10 @@ class network():
 
     def rej_sampling(self,reps = 100000):  
         N = {"positive": 0, "negative": 0}
-        X, e = parsing().parse_data("P(a|-b,-e)")
+        X, e = parsing().parse_data("P(d|+t)")
         for j in range(1, reps):
             random_query = self.sampleVariables()
-            print(random_query,X,e,self.is_consistent(e,random_query))
+            #print(random_query,X,e,self.is_consistent(e,random_query))
             if self.is_consistent(e,random_query):
                 if('+'+X[0] in random_query):
                     N["positive"] += 1
@@ -121,7 +123,7 @@ class network():
                     N["negative"] += 1
 
         k = self.normalize(N)
-        print("rej_sampling P(-a|-b-e): ",k)
+        print("rej_sampling P(d|+t): ",k)
         
 
     def bayes_eq(self):
@@ -134,10 +136,8 @@ class network():
         unormalized_p_posd_negt = float(p_negt_posd) * float(p_posd)
         unormalized_probs = {
             "positive": unormalized_p_posd_post, "negative": unormalized_p_posd_negt}
-        normalized_p_posd = self.normalize(unormalized_probs)
-        k = normalized_p_posd
+        k = self.normalize(unormalized_probs)
         print("bayes_eq P(d|t): ",k)
-
 
 if __name__ == "__main__":
 
@@ -145,4 +145,4 @@ if __name__ == "__main__":
 
     net.rej_sampling()
 
-    #net.bayes_eq()
+    net.bayes_eq()
