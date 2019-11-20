@@ -1,7 +1,7 @@
 #!/bin/bash
 
 git config --global user.name "parisChatz"
-git config --gobal user.email "parischatz94@gmail.com"
+git config --global user.email "parischatz94@gmail.com"
 
 git pull
 git add .
