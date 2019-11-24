@@ -19,7 +19,7 @@ class PriorSampling():
 
         return sampledValue.split("|")[0]
 
-    def sampleVariables(self, printEvent=False):
+    def sampleVariables(self,evidences=None, printEvent=False):
         event=[]
         sampledVars={}
 
@@ -34,10 +34,20 @@ class PriorSampling():
                     evidence+=sampledVars[parent]
                 conditional=variable.lower()+"|"+evidence
 
-            sampledValue=self.sampleVariable(self.net[variable], conditional)
+            if evidences is not None:
+                evid_pos = [e[1:] for e in evidences]
+
+                if variable.lower() not in evid_pos:
+                    sampledValue=self.sampleVariable(self.net[variable], conditional)
+                else:
+                    indx_evid = evid_pos.index(variable.lower())
+                    sampledValue=evidences[indx_evid]
+            else:
+                sampledValue=self.sampleVariable(self.net[variable], conditional)
             event.append(sampledValue)
             sampledVars[variable]=sampledValue
-                
+        
+
         if printEvent: print(event)
         return event
 
