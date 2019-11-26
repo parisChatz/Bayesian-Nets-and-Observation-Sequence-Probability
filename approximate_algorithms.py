@@ -90,3 +90,4 @@ class Rejection_Sampling_algorithm():
                 k.append(False)
         consistent=all(k)
         return consistent
+
