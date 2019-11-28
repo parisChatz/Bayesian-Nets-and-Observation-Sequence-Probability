@@ -1,3 +1,4 @@
+
 class networks():
     CPTs={}
 
@@ -41,6 +42,64 @@ class networks():
             self.CPTs["order"] = ["D", "T"]
             self.CPTs["parents"] = {"D": None, "T": "D"}
 
+        elif netID == 'cancer':
+
+            self.CPTs["AN"]={"+an":None,"-an":None}
+            self.CPTs["PP"]={"+pp":None,"-pp":None}
+            self.CPTs["BED"]={"+bed":None,"-bed":None}
+
+            self.CPTs["G"]={"+g":None,"-g":None}
+            self.CPTs["S"]={"+s|+an+pp":None,"+s|+an-pp":None,"+s|-an+pp":None,"+s|-an-pp":None,"-s|+an+pp":None,"-s|+an-pp":None,"-s|-an+pp":None,"-s|-an-pp":None}
+            self.CPTs["YF"]={"+yf|+s":None, "+yf|-s":None,"-yf|+s":None, "-yf|-s":None}
+
+            self.CPTs["AL"]={"+al":None,"-al":None}
+            self.CPTs["LC"]={"+lc|+s+g":None,"+lc|-s+g":None,"+lc|+s-g":None,"+lc|-s-g":None,"-lc|+s+g":None,"-lc|-s+g":None,"-lc|+s-g":None,"-lc|-s-g":None}
+            self.CPTs["AD"]={"+ad|+g":None,"+ad|-g":None,"-ad|+g":None,"-ad|-g":None}
+
+            self.CPTs["CO"]={"+co|+al+lc":None,"+co|-al+lc":None,"+co|+al-lc":None,"+co|-al-lc":None,"-co|+al+lc":None,"-co|-al+lc":None,"-co|+al-lc":None,"-co|-al-lc":None}
+            self.CPTs["F"]={"+f|+co+lc":None,"+f|-co+lc":None,"+f|+co-lc":None,"+f|-co-lc":None,"-f|+co+lc":None,"-f|-co+lc":None,"-f|+co-lc":None,"-f|-co-lc":None}
+            self.CPTs["CA"]={"+ca|+f+ad":None,"+ca|-f+ad":None,"+ca|+f-ad":None,"+ca|-f-ad":None,"-ca|+f+ad":None,"-ca|-f+ad":None,"-ca|+f-ad":None,"-ca|-f-ad":None}
+            
+            self.CPTs["order"]=["AN","PP","YF","BED","S","G","LC","AD","AL","CO","F","CA"]
+            self.CPTs["parents"]={"AN":None,"PP":None,"YF":None,"BED":None,"S":"AN,PP,YF","G":None,"LC":"S,G","AD":"G","AL":None,"CO":"AL,LC","F":"CO,LC","CA":"F,AD"}
+
+            self.CPTs["names"] = {
+                'Smoking': 'S',
+                'Yellow_Fingers': 'YF',
+                'Anxiety': 'AN',
+                'Peer_Pressure': 'PP',
+                'Genetics': 'G',
+                'Attention_Disorder': 'AD',
+                'Born_an_Even_Day': 'BED',
+                'Car_Accident': 'CO',
+                'Fatigue': 'F',
+                'Allergy': 'AL',
+                'Coughing': 'CA',
+                'Lung_cancer': 'LC'
+            }
+
+            class ClassName():
+                def __init__(self,net):
+                    self.net = net
+                    
+            # allData = []
+            # with open('lucas0_train.csv', 'r') as csv_file:
+            #     csv_reader = csv.reader(csv_file, delimiter=',')
+
+            #     title = csv_reader.next()
+            #     for num, item in enumerate(title):
+            #         title[num] = pairing[item]
+
+            #     for row in csv_reader:
+            #         row[:] = [True if x == '1' else False for x in row]
+            #         allData.append(dict(zip(title, row)))
+
+            # for inquery in known_data.keys():
+            #     mycount = self._getCPTCounts(inquery, allData, True)
+            #     mycount2 = self._getCPTCounts(inquery, allData, False)
+            #     prob = float(mycount + 1) / float(mycount2 + 2)
+            #     prob = round(prob, 2)
+            #     known_data[inquery] = prob
         else:
             print("UNKNOWN network="+str(netID))
             exit(0)
