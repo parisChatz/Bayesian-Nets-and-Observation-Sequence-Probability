@@ -55,5 +55,5 @@ if __name__ == "__main__":
 
     be_result = bayes_eq(Pd,Ptd,neg_Ptd)
 
-    print('Rejection Sampling: ', rs_result)
+    print('rejection Sampling: ', rs_result)
     print('Bayes eq: ', be_result)

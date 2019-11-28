@@ -5,7 +5,7 @@ git config --global user.email "parischatz94@gmail.com"
 
 git pull
 git add .
-git commit -m "update from uni"
+git commit 
 git push 
 
 git config --global --unset user.name
