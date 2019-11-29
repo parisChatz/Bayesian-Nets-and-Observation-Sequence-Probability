@@ -1,7 +1,9 @@
 import csv
+import numpy
 from collections import OrderedDict
 from parsing import parsing
 from approximate_algorithms import normalize
+import pandas
 
 def numberofparents(node):
     CPTs["parents"]={"AN":None,"PP":None,"YF":None,"BED":None,"S":"AN,PP,YF","G":None,"LC":"S,G","AD":"G","AL":None,"CO":"AL,LC","F":"CO,LC","CA":"F,AD"}
@@ -27,7 +29,7 @@ def count(list):
     return pos,neg,len(list)
 
 
-def findprob(sign,numberofparents=0,list1=[],list2=[],list3=[]):
+def findprob(sign,numberofparents,list1=[],list2=[],list3=[]):
     if numberofparents == 0:
         pos,neg,size = count(list1) 
         pos_prob = (pos + 1)/(size+2)
@@ -83,29 +85,7 @@ with open('lucas0_train.csv', mode='r') as csv_file:
     title = next(csv_reader)
     for num, item in enumerate(title):
         title[num] = pairing[item]
-    print(title)
-
     for row in csv_reader:
         row[:] = ["+" if x == '1' else "-" for x in row]
         allData.append(dict(zip(title, row)))
-print(CPTs["parents"])
-
-for node in CPTs['parents']:
-    print(node,numberofparents(node))
-
-list=[]
-for i in range(len(allData)):
-    list.append(allData[i]["PP"])
-
-number , parents = numberofparents("PP")
-print("CPTs[PP][+pp] and CPTs[PP][-pp]",findprob("+",number,list))
-
-for node in CPTs['parents']:
-    number , parents = numberofparents(node)
-    print(node,number,parents)
-    if number == 0:
-        pos,neg=findprob("+",number,list)
-        for cond in CPTs[node]:
-            print(node,cond)
-number , parents = numberofparents("YF")
-print(CPTs["parents"]["YF"],number)
+print(allData)
