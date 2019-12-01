@@ -18,10 +18,11 @@ class parsing():
     def parse_querry(self, data):
         data = data.split("|")
         # data = data.replace("|",",")
+        # print(data, len(data),"!")
         if len(data)==1:
             return data[0],None
         else:
-            return data[0],data[1]
+            return data
 
     def parse_evidence(self,evidence):
         if evidence == None:
@@ -30,3 +31,11 @@ class parsing():
             new_evidence = evidence.replace("+",",").replace("-",",")[1:].split(",")
 
             return new_evidence
+
+    def parse_parents(self,parents):
+        if parents == None:
+            return None
+        else:
+            new_parents = parents.split(",")
+
+            return new_parents

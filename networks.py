@@ -64,18 +64,18 @@ class networks():
             self.CPTs["parents"]={"AN":None,"PP":None,"YF":None,"BED":None,"S":"AN,PP,YF","G":None,"LC":"S,G","AD":"G","AL":None,"CO":"AL,LC","F":"CO,LC","CA":"F,AD"}
 
             self.CPTs["names"] = {
-                'Smoking': 'S',
-                'Yellow_Fingers': 'YF',
-                'Anxiety': 'AN',
-                'Peer_Pressure': 'PP',
-                'Genetics': 'G',
-                'Attention_Disorder': 'AD',
-                'Born_an_Even_Day': 'BED',
-                'Car_Accident': 'CO',
-                'Fatigue': 'F',
-                'Allergy': 'AL',
-                'Coughing': 'CA',
-                'Lung_cancer': 'LC'
+                'S': 'Smoking',
+                'YF': 'Yellow_Fingers',
+                'AN': 'Anxiety',
+                'PP': 'Peer_Pressure',
+                'G': 'Genetics',
+                'AD': 'Attention_Disorder',
+                'BED': 'Born_an_Even_Day',
+                'CO': 'Car_Accident',
+                'F': 'Fatigue',
+                'AL': 'Allergy',
+                'CA': 'Coughing',
+                'LC': 'Lung_cancer'
             }
 
             class ClassName():
