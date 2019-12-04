@@ -106,3 +106,4 @@ class networks():
             exit(0)
 
         return self.CPTs
+        

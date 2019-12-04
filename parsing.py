@@ -1,7 +1,8 @@
 def split(strng, sep, pos):
     strng = strng.split(sep)
     return sep.join(strng[:pos]), sep.join(strng[pos:])
-    
+
+
 class parsing():
 
     def __init__(self):
@@ -19,20 +20,21 @@ class parsing():
         data = data.split("|")
         # data = data.replace("|",",")
         # print(data, len(data),"!")
-        if len(data)==1:
-            return data[0],None
+        if len(data) == 1:
+            return data[0], None
         else:
             return data
 
-    def parse_evidence(self,evidence):
+    def parse_evidence(self, evidence):
         if evidence == None:
             return None
         else:
-            new_evidence = evidence.replace("+",",").replace("-",",")[1:].split(",")
+            new_evidence = evidence.replace(
+                "+", ",").replace("-", ",")[1:].split(",")
 
             return new_evidence
 
-    def parse_parents(self,parents):
+    def parse_parents(self, parents):
         if parents == None:
             return None
         else:
