@@ -60,8 +60,9 @@ class networks():
             self.CPTs["F"]={"+f|+co+lc":None,"+f|-co+lc":None,"+f|+co-lc":None,"+f|-co-lc":None,"-f|+co+lc":None,"-f|-co+lc":None,"-f|+co-lc":None,"-f|-co-lc":None}
             self.CPTs["CA"]={"+ca|+f+ad":None,"+ca|-f+ad":None,"+ca|+f-ad":None,"+ca|-f-ad":None,"-ca|+f+ad":None,"-ca|-f+ad":None,"-ca|+f-ad":None,"-ca|-f-ad":None}
             
-            self.CPTs["order"]=["AN","PP","YF","BED","S","G","LC","AD","AL","CO","F","CA"]
-            self.CPTs["parents"]={"AN":None,"PP":None,"YF":None,"BED":None,"S":"AN,PP,YF","G":None,"LC":"S,G","AD":"G","AL":None,"CO":"AL,LC","F":"CO,LC","CA":"F,AD"}
+            self.CPTs["order"]=["AN","PP","BED","G","AL","S","YF","LC","AD","CO","F","CA"]
+
+            self.CPTs["parents"]={"AN":None,"PP":None,"BED":None,"G":None,"AL":None,"YF":"S","S":"AN,PP","LC":"S,G","AD":"G","CO":"AL,LC","F":"CO,LC","CA":"F,AD"}
 
             self.CPTs["names"] = {
                 'S': 'Smoking',

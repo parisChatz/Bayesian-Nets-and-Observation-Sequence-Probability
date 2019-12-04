@@ -3,13 +3,15 @@
 from approximate_algorithms import Likelihood_Weighting_algorithm
 from approximate_algorithms import Rejection_Sampling_algorithm
 from networks import networks
+from read_cpt_from_csv import read_cpts_from_csv
+from pprint import pprint
 
 if __name__ == "__main__":
 
-    query = ('S',['+w'])
-
-    net = networks().initialiseNet("sprinkler")
-
+    # query = ('S',['-c'])
+    # net = networks().initialiseNet("sprinkler")
+    query = ('CA',['+a','-f'])
+    net = read_cpts_from_csv(networks().initialiseNet("cancer")).read_cpts()
     lw = Likelihood_Weighting_algorithm(net)
     lw_result = lw.likelihood_weighting(*query)
     

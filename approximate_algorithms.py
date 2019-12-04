@@ -31,7 +31,7 @@ class Likelihood_Weighting_algorithm():
             W[k]+=weight
      
         normalized_probabilities = normalize(W)
-        
+        print(normalized_probabilities)
         return normalized_probabilities
 
     def weighted_sample(self,evidences):
@@ -64,7 +64,7 @@ class Rejection_Sampling_algorithm():
     def __init__(self,net):
         self.net=net
 
-    def rej_sampling(self,X,evidences,reps = 1000):  
+    def rej_sampling(self,X,evidences,reps = 5000):  
         N = OrderedDict()
         N["+"]=0
         N["-"]=0
@@ -78,6 +78,8 @@ class Rejection_Sampling_algorithm():
                     N["-"] += 1
 
         normalized_probabilities = normalize(N)
+        print(normalized_probabilities)
+
         return normalized_probabilities
 
         

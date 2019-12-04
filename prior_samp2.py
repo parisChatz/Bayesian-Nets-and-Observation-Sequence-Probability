@@ -8,7 +8,7 @@ class PriorSampling():
     def sampleVariable(self, CPT, conditional):
         sampledValue=None
         randnumber=random.random()
-
+        # print(CPT,conditional,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         value1=CPT["+"+conditional]
         value2=CPT["-"+conditional]
 
