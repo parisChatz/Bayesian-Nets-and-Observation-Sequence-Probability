@@ -7,10 +7,13 @@ from read_cpt_from_csv import read_cpts_from_csv
 
 if __name__ == "__main__":
 
-    query = ('S', ['-c'])
-    net = networks().initialiseNet("sprinkler")
-    # query = ('LC', ['+s', '-g'])
-    # net = read_cpts_from_csv(networks().initialiseNet("cancer")).read_cpts()
+    Variable = str(input("Input the wanted Variable name (eg. LC all caps no sign): "))
+    evidence = str(input("Input the evidences name (eg. +s,+g): "))
+    evidence  = evidence.split(",")
+
+    query = (Variable,evidence)
+    net = networks().initialiseNet("cancer")
+    net = read_cpts_from_csv(networks().initialiseNet("cancer")).read_cpts()
     lw = Likelihood_Weighting_algorithm(net)
     lw_result = lw.likelihood_weighting(*query)
 
