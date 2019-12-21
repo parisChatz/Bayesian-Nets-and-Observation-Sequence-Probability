@@ -26,7 +26,7 @@ class parsing():
             return data
 
     def parse_evidence(self, evidence):
-        if evidence == None:
+        if evidence is None:
             return None
         else:
             new_evidence = evidence.replace(
@@ -35,7 +35,7 @@ class parsing():
             return new_evidence
 
     def parse_parents(self, parents):
-        if parents == None:
+        if parents is None:
             return None
         else:
             new_parents = parents.split(",")

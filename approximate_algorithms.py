@@ -1,10 +1,15 @@
 from prior_samp2 import PriorSampling
 from collections import OrderedDict
 
+# Normalization funciton
+# Input unormalized probabilities
+# Output is an ordered dict of normalised probabilities
+
 
 def normalize(unormalized_probs):
     normalized = OrderedDict()
     prob_sum = float(sum(unormalized_probs.values()))
+
     for sign, value in unormalized_probs.items():
         if prob_sum != 0:
             normalized[sign] = value / prob_sum
@@ -69,30 +74,22 @@ class Rejection_Sampling_algorithm():
         N = OrderedDict()
         N["+"] = 0
         N["-"] = 0
-        # print(X, evidences)
         for j in range(1, reps + 1):
             random_query = PriorSampling(self.net).sampleVariables()
             if self.is_consistent(evidences, random_query):
-                # print('+' + X.lower(), random_query,
-                #       "!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 if('+' + X.lower() in random_query):
                     N["+"] += 1
                 else:
                     N["-"] += 1
-            # print(N)
         normalized_probabilities = normalize(N)
         return normalized_probabilities
 
     def is_consistent(self, evidences, random_query):
         k = []
         for evidence in evidences:
-            # print(evidence, random_query, k)
             if evidence in random_query:
                 k.append(True)
-                # print("evidence in random querry")
             else:
-                # print("evidence NOT in random querry")
                 k.append(False)
         consistent = all(k)
-        # print("is consistent?", consistent)
         return consistent

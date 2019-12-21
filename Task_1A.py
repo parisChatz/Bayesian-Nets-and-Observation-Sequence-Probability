@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 
-from parsing import parsing
 from approximate_algorithms import normalize
 from approximate_algorithms import Rejection_Sampling_algorithm
 from collections import OrderedDict
-
 from networks import networks
 
 
@@ -12,13 +10,7 @@ def bayes_eq(Pd, Ptd, neg_Ptd):
 
     p_posd = Pd
     p_post_posd = Ptd
-    p_negt_negd = neg_Ptd
     p_negt_posd = 1 - neg_Ptd
-
-    # p_posd = self.net["D"]["+d"]
-    # p_post_posd = self.net["T"]["+t|+d"]
-    # p_negt_negd = self.net["T"]["-t|-d"]
-    # p_negt_posd = self.net["T"]["-t|+d"]
 
     k = OrderedDict()
     unormalized_probs = OrderedDict()
@@ -36,13 +28,18 @@ def bayes_eq(Pd, Ptd, neg_Ptd):
 
 if __name__ == "__main__":
 
+    # query initialisation
     query = ('D', ['+t'])
 
+    # wanted probabilities import
     Pd = float(input("Input P(d): "))
     Ptd = float(input("Input P(+t|+d): "))
     neg_Ptd = float(input("Input P(-t|-d): "))
 
+    # net initialisation
     net = networks().initialiseNet("disease")
+
+    # conditional distirbution table value import/calculation
     net['D']['+d'] = Pd
     net['D']['-d'] = 1 - Pd
     net['T']['+t|+d'] = Ptd
@@ -50,10 +47,13 @@ if __name__ == "__main__":
     net['T']['-t|-d'] = neg_Ptd
     net['T']['-t|+d'] = 1 - neg_Ptd
 
+    # rejection sampling initialisation and call
     rs = Rejection_Sampling_algorithm(net)
     rs_result = rs.rej_sampling(*query)
 
+    # bayes equation call
     be_result = bayes_eq(Pd, Ptd, neg_Ptd)
 
+    # result print
     print('rejection Sampling: ', rs_result)
     print('Bayes eq: ', be_result)
