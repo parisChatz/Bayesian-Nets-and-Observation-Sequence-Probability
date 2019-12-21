@@ -36,5 +36,6 @@ In state ON, the probability of measuring a Warm or Hot temperature is 0.4, whil
 In state OFF, the probability of measuring a Warm or Cold temperature is 0.45, while the probability of measuring Hot is 0.1.
 
 ### Problem formalisation
-Initially the transition matrix and the emission matrix was coded. Then the program promts the user to give a sequence of any observations (eg. warm,hot,cold). Then using the sequence observation algorithm the probability of observing such a sequence is calculated. 
+Initially the transition matrix and the emission matrix was coded. Then the program promts the user to give a sequence of any observations (eg. warm,hot,cold). Then using the sequence observation algorithm the probability of observing such a sequence is calculated.
+
 ` St = P(et|xt)* Σxt-1(P(xt|xt-1)*st-1)`
