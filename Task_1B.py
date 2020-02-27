@@ -9,7 +9,7 @@
 from approximate_algorithms import Likelihood_Weighting_algorithm
 from approximate_algorithms import Rejection_Sampling_algorithm
 from networks import networks
-from read_cpt_from_csv import read_cpts_from_csv
+from parameter_learning_from_csv import read_cpts_from_csv
 
 if __name__ == "__main__":
 

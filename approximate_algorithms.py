@@ -1,4 +1,4 @@
-from prior_samp2 import PriorSampling
+from PriorSampling import PriorSampling
 from collections import OrderedDict
 
 # Normalization funciton

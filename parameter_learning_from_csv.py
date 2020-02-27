@@ -3,7 +3,7 @@ from networks import networks
 from parsing import parsing
 
 
-class read_cpts_from_csv():
+class parameter_learning_from_csv():
     def __init__(self, net):
         self.net = net
         self.df = pd.read_csv('lucas0_train.csv')
@@ -103,4 +103,4 @@ class read_cpts_from_csv():
 
 
 if __name__ == '__main__':
-    read_cpts_from_csv(networks().initialiseNet("cancer")).read_cpts()
+    parameter_learning_from_csv(networks().initialiseNet("cancer")).read_cpts()
