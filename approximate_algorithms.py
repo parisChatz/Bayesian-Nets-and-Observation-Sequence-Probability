@@ -1,6 +1,7 @@
 from PriorSampling import PriorSampling
 from collections import OrderedDict
 
+
 # Normalization funciton
 # Input unormalized probabilities
 # Output is an ordered dict of normalised probabilities
@@ -20,7 +21,7 @@ def normalize(unormalized_probs):
     return normalized
 
 
-class Likelihood_Weighting_algorithm():
+class LikelihoodWeightingAlgorithm:
 
     def __init__(self, net):
         self.net = net
@@ -65,7 +66,7 @@ class Likelihood_Weighting_algorithm():
         return events, w
 
 
-class Rejection_Sampling_algorithm():
+class RejectionSamplingAlgorithm:
 
     def __init__(self, net):
         self.net = net
@@ -77,14 +78,15 @@ class Rejection_Sampling_algorithm():
         for j in range(1, reps + 1):
             random_query = PriorSampling(self.net).sampleVariables()
             if self.is_consistent(evidences, random_query):
-                if('+' + X.lower() in random_query):
+                if '+' + X.lower() in random_query:
                     N["+"] += 1
                 else:
                     N["-"] += 1
         normalized_probabilities = normalize(N)
         return normalized_probabilities
 
-    def is_consistent(self, evidences, random_query):
+    @staticmethod
+    def is_consistent(evidences, random_query):
         k = []
         for evidence in evidences:
             if evidence in random_query:

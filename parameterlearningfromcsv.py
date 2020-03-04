@@ -1,9 +1,9 @@
 import pandas as pd
-from networks import networks
-from parsing import parsing
+from networks import Networks
+from parsing import Parsing
 
 
-class parameter_learning_from_csv():
+class ParameterLearningFromCsv:
     def __init__(self, net):
         self.net = net
         self.df = pd.read_csv('lucas0_train.csv')
@@ -54,7 +54,7 @@ class parameter_learning_from_csv():
         for node in self.net["order"]:
             keylist = list(self.net[node].keys())
             for cond_prob in range(len(keylist)):
-                variable, condition = parsing().parse_querry(
+                variable, condition = Parsing().parse_querry(
                     keylist[cond_prob])
                 variables.append(variable)
                 if condition is None:
@@ -65,7 +65,7 @@ class parameter_learning_from_csv():
                 if condition is None:
                     cond_no_sign.append([None])
                 else:
-                    cond_no_sign.append(parsing().parse_evidence(condition))
+                    cond_no_sign.append(Parsing().parse_evidence(condition))
         new_cond = cond_no_sign
 
         for i in range(len(cond_no_sign)):
@@ -103,4 +103,4 @@ class parameter_learning_from_csv():
 
 
 if __name__ == '__main__':
-    parameter_learning_from_csv(networks().initialiseNet("cancer")).read_cpts()
+    ParameterLearningFromCsv(Networks().initialiseNet("cancer")).read_cpts()

@@ -3,12 +3,13 @@ def split(strng, sep, pos):
     return sep.join(strng[:pos]), sep.join(strng[pos:])
 
 
-class parsing():
+class Parsing:
 
     def __init__(self):
         pass
 
-    def parse_data(self, data):
+    @staticmethod
+    def parse_data(data):
 
         data = data.replace("P(", "").replace(")", "").split("|")
         if len(data) > 1:
@@ -16,7 +17,8 @@ class parsing():
             evidence = data[1].split(",")
         return query, evidence
 
-    def parse_querry(self, data):
+    @staticmethod
+    def parse_querry(data):
         data = data.split("|")
         # data = data.replace("|",",")
         # print(data, len(data),"!")
@@ -25,7 +27,8 @@ class parsing():
         else:
             return data
 
-    def parse_evidence(self, evidence):
+    @staticmethod
+    def parse_evidence(evidence):
         if evidence is None:
             return None
         else:
@@ -34,7 +37,8 @@ class parsing():
 
             return new_evidence
 
-    def parse_parents(self, parents):
+    @staticmethod
+    def parse_parents(parents):
         if parents is None:
             return None
         else:

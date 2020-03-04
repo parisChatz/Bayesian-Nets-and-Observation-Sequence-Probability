@@ -1,4 +1,4 @@
-class networks():
+class Networks:
     CPTs = {}
 
     def __init__(self):

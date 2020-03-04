@@ -5,27 +5,27 @@
 # distribution of Smoking given Coughing and Fatigue.
 # Network topology and parameter values downloaded from the following link
 # http://www.causality.inf.ethz.ch/data/LUCAS.html
+from typing import Dict, Any
 
-from approximate_algorithms import Likelihood_Weighting_algorithm
-from approximate_algorithms import Rejection_Sampling_algorithm
-from networks import networks
-from parameter_learning_from_csv import read_cpts_from_csv
+from approximate_algorithms import LikelihoodWeightingAlgorithm
+from approximate_algorithms import RejectionSamplingAlgorithm
+from networks import Networks
+from parameterlearningfromcsv import ParameterLearningFromCsv
 
 if __name__ == "__main__":
-
     Variable = str(
         input("Input the wanted Variable name (eg. LC all caps no sign): "))
     evidence = str(input("Input the evidences name (eg. +s,+g): "))
     evidence = evidence.split(",")
 
     query = (Variable, evidence)
-    net = networks().initialiseNet("cancer")
-    net = read_cpts_from_csv(networks().initialiseNet("cancer")).read_cpts()
+    network = Networks().initialiseNet("cancer")  # type dictionary with empty network topology
+    net = ParameterLearningFromCsv(network).read_cpts()
 
-    lw = Likelihood_Weighting_algorithm(net)
+    lw = LikelihoodWeightingAlgorithm(net)
     lw_result = lw.likelihood_weighting(*query)
 
-    rs = Rejection_Sampling_algorithm(net)
+    rs = RejectionSamplingAlgorithm(net)
     rs_result = rs.rej_sampling(*query)
 
     print('Likelihood Weighting: ', lw_result)
