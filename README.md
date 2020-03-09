@@ -35,7 +35,7 @@ A step by step series of examples that tell you how to get a development env run
 
 * Open a terminal and do
 `git clone https://github.com/parisChatz/Bayesian-Nets-and-Observation-Sequence-Probability.git`
-* Make sure to install the prerequisites.
+* Make sure to install the prerequisites. You need to install these with `sudo pip3 install -r requirements.txt` before you can run this.
 
 To test that everything works right open a new terminal and do `python3 your_home/Bayesian-Nets-and-Observation-Sequence-Probability/Task_1A.py`. 
 This should run the first task that solves the Rare Disease and test problem.
